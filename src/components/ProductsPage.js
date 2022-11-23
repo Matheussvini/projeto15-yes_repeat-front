@@ -1,7 +1,11 @@
 import styled from "styled-components";
 
 export default function ProductsPage() {
-  return <PageOfProdutcs></PageOfProdutcs>;
+  return (
+    <PageOfProdutcs>
+      <h1>Hello word</h1>
+    </PageOfProdutcs>
+  );
 }
 
 const PageOfProdutcs = styled.div`
