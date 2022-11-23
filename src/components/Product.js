@@ -10,6 +10,10 @@ export default function Product() {
 }
 
 const ProductBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   height: 205px;
   width: 145px;
 
@@ -25,5 +29,12 @@ const ProductBox = styled.div`
   img {
     width: 129px;
     border-radius: 5px;
+  }
+
+  p {
+    font-family: Roboto;
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: 0em;
   }
 `;
