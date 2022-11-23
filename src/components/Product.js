@@ -3,7 +3,10 @@ import styled from "styled-components";
 export default function Product() {
   return (
     <ProductBox>
-      <img></img>
+      <img
+        src=""
+        alt="imagem"
+      ></img>
       <p></p>
     </ProductBox>
   );
@@ -15,9 +18,9 @@ const ProductBox = styled.div`
   align-items: center;
 
   height: 205px;
-  width: 145px;
+  width: 36%;
 
-  background-color: blue;
+  background-color: #ffff;
 
   margin: 10px;
 
