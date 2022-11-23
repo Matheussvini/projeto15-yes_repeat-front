@@ -1,12 +1,18 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
+
+
+
 export default function Product() {
+  const navigate = useNavigate()
+
+  function selectItem(itemId){
+    navigate(`/produto/:${itemId}`)
+  }
   return (
-    <ProductBox>
-      <img
-        src=""
-        alt="imagem"
-      ></img>
+    <ProductBox onClick={()=>selectItem(5)} >
+      <img src="" alt="imagem"></img>
       <p></p>
     </ProductBox>
   );
