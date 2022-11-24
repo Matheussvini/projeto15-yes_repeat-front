@@ -6,8 +6,12 @@ export default function Logo() {
 }
 
 const Img = styled.img`
-  width: auto;
+  width: 300px;
   max-width: 60vh;
   margin-top: -50px;
+  margin-bottom: -50px;
   max-height: 80vh;
+  @media (max-width: 300px) {
+    width: 100%;
+  }
 `;
