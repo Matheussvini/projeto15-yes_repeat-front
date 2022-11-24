@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import imgLogo from "../assets/LogoTopBar.png";
+import imgLogo from "../assets/images/logo.png";
 
 function searchByName(event, value) {
   event.preventDefault();
