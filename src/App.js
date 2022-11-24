@@ -1,8 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { GlobalStyle } from "./assets/styles";
+import GlobalStyle from "./assets/styles/GlobalStyle";
 import { useState } from "react";
 // import UserContext from "./components/Context/context";
 import ProductsPage from "./components/ProductsPage";
+import CreateUserPage from "./pages/CreateUserPage/CreateUserPage";
 
 function App() {
   const [user, setUser] = useState([]);
@@ -20,8 +21,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         {/* <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage/>} />
-          <Route path="/cadastro" element={<CreateUserPage />} /> */}
+          <Route path="/login" element={<LoginPage/>} /> */}
+          <Route path="/cadastro" element={<CreateUserPage />} />
         <Route path="/produtos" element={<ProductsPage />} />
         <Route path="/produto/:id" />
         {/* <Route path="/adiciona-produto/:category" element={<AddProductsPage />} />
