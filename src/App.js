@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import GlobalStyle from "./assets/styles/GlobalStyle";
 import { useState } from "react";
 import UserContext from "./components/Context/context";
-import ProductsPage from "./components/ProductsPage";
+import ProductsPage from "./pages/ProductsPage/ProductsPage";
 import CreateUserPage from "./pages/CreateUserPage/CreateUserPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 
