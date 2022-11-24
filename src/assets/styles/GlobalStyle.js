@@ -63,6 +63,7 @@ input{
   font-weight: 400;
   font-size: 20px;
   padding: 0 11px;
+  color: #254A38;
   ::placeholder{
     color: #F19620;
   }
@@ -70,6 +71,9 @@ input{
     background-color: #F2F2F2;
     border: 1px solid #D5D5D5;
     color: #AFAFAF;
+  }
+  @media (max-width: 300px) {
+    width: 100%;
   }
 }
 button{
