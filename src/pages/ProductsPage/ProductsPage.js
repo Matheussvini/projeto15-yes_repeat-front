@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import ProductsList from "./ProductsList";
-import SearchBar from "./SearchBar";
+import SearchBar from "../../components/SearchBar/SearchBar";
 
 export default function ProductsPage() {
   return (
