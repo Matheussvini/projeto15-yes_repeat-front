@@ -5,6 +5,7 @@ import UserContext from "./components/Context/context";
 import ProductsPage from "./pages/ProductsPage/ProductsPage";
 import CreateUserPage from "./pages/CreateUserPage/CreateUserPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
+import AddProductPage from "./pages/AddProductPage/AddProductPage";
 
 function App() {
   const [user, setUser] = useState([]);
@@ -26,8 +27,8 @@ function App() {
           <Route path="/cadastro" element={<CreateUserPage />} />
         <Route path="/produtos" element={<ProductsPage />} />
         <Route path="/produto/:id" />
-        {/* <Route path="/adiciona-produto/:category" element={<AddProductsPage />} />
-          <Route path="/sacola" element={<ShoppingBagPage/>} />
+         <Route path="/admin/adiciona-produto" element={<AddProductPage />} />
+          {/*<Route path="/sacola" element={<ShoppingBagPage/>} />
           <Route path="/pagamento" element={<CheckoutPage/>} /> */}
       </Routes>
 
