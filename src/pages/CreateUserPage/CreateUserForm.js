@@ -117,6 +117,7 @@ export default function CreateUserForm() {
         required
         disabled={disabled}
       />
+      <Text>{warning}</Text>
       <label htmlFor="cep">Endereço:</label>
       <InputBox>
         <Input60
@@ -180,7 +181,6 @@ export default function CreateUserForm() {
           disabled={disabled}
         />
       </InputBox>
-      <Text>{warning}</Text>
 
       <FormButton disabled={disabled}>
         {disabled ? (

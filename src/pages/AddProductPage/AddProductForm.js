@@ -125,7 +125,7 @@ export default function AddProductForm({ disabled, setDisabled }) {
         type="number"
         min={0}
         placeholder="valor"
-        step=".01"
+        step="1.0"
         onChange={handleForm}
         disabled={disabled}
         required

@@ -47,7 +47,12 @@ body{
 	font-family: 'Roboto', sans-serif;
 	font-weight: 400;
 	background-color: #F3F3F3;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 	color: #000;
+}
+html, body, #root{
+  height: 100%;
 }
 input{
   background: #FFFFFF;
