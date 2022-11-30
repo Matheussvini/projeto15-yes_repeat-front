@@ -7,7 +7,8 @@ import UserContext from "../../components/Context/context";
 import FormButton from "../../components/FormButton/FormButton";
 import { BASE_URL } from "../../constants/urls";
 
-export default function AddProductForm({ disabled, setDisabled }) {
+export default function AddProductForm({ disabled, setDisabled, urls }) {
+  console.log("urls", urls);
   const [form, setForm] = useState({
     name: "",
     color: "",
@@ -15,23 +16,24 @@ export default function AddProductForm({ disabled, setDisabled }) {
     description: "",
     state: "",
     value: 0,
-    image: [],
+    urls,
   });
+
   const { user } = useContext(UserContext);
-  const [warning, setWarning] = useState("");
   const navigate = useNavigate();
 
   function handleForm(e) {
     const { name, value } = e.target;
     if (name === "value") {
       setForm({ ...form, [name]: Number(value).toFixed(0) });
-    }  else{
+    } else {
       setForm({ ...form, [name]: value });
     }
   }
 
   function registration(e) {
     e.preventDefault();
+    if (!urls.length) return alert("Envie alguma imagem do produto!");
     setDisabled(true);
 
     const config = {
@@ -40,10 +42,10 @@ export default function AddProductForm({ disabled, setDisabled }) {
       },
     };
 
-    console.log("FORMMMMMMM",form);
+    console.log("FORMMMMMMM", { ...form, urls });
 
     axios
-      .post(`${BASE_URL}/admin/produtos`, form, config)
+      .post(`${BASE_URL}/admin/produtos`, { ...form, urls }, config)
       .then((res) => {
         console.log(res);
         console.log(res.data);
@@ -52,33 +54,15 @@ export default function AddProductForm({ disabled, setDisabled }) {
       })
       .catch((err) => {
         setDisabled(false);
-        console.log(err)
+        console.log(err);
         console.log(err.response.data);
-        console.log(err)
-        err.response.data
-          ? alert(err.response.data)
-          : alert(err.response);
+        console.log(err);
+        err.response.data ? alert(err.response.data) : alert(err.response);
       });
   }
 
   return (
-    <Form onSubmit={registration} encType="multipart/form-data" >
-      <label htmlFor="name">Cadastro de produto:</label>
-      <Space />
-      <Div>
-        <FilesLabel htmlFor="image">Selecione as fotos:</FilesLabel>
-        <FilesInput
-          name="image"
-          id="image"
-          type="file"
-          multiple
-          accept=".jpg,.png"
-          onChange={handleForm}
-          disabled={disabled}
-          required
-        />
-      </Div>
-      <Space />
+    <Form onSubmit={registration} encType="multipart/form-data">
       <input
         name="name"
         type="text"
@@ -125,7 +109,7 @@ export default function AddProductForm({ disabled, setDisabled }) {
         type="number"
         min={0}
         placeholder="valor"
-        step=".01"
+        step="1.0"
         onChange={handleForm}
         disabled={disabled}
         required
@@ -153,61 +137,11 @@ export default function AddProductForm({ disabled, setDisabled }) {
 
 const Form = styled.form`
   max-width: 90%;
-  margin-top: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  label {
-    width: 100%;
-    text-align: left;
-    color: #fff;
-    margin-bottom: 5px;
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 17.61px;
-  }
-`;
-const Text = styled.p`
-  margin-bottom: 15px;
-  font-weight: 700;
-  font-size: 15px;
-  line-height: 17.61px;
-  color: red;
-  text-decoration: underline;
 `;
 const Space = styled.div`
   height: 15px;
   width: 100%;
-`;
-const FilesLabel = styled.label`
-  background-color: #f19620;
-  text-transform: uppercase;
-  text-align: center;
-  cursor: pointer;
-  width: 300px;
-  height: 45px;
-  border-radius: 5px;
-  margin-bottom: 15px;
-  display: flex;
-  align-items: center;
-  box-sizing: border-box;
-  font-family: "Raleway", sans-serif;
-  font-weight: 400;
-  font-size: 20px;
-  padding: 0 11px;
-`;
-const FilesInput = styled.input`
-  min-width: 485px;
-  position: absolute;
-  left: -182px;
-  margin-bottom: 15px;
-  padding: 8px;
-  box-sizing: border-box;
-  word-wrap: break-word;
-`;
-const Div = styled.div`
-  position: relative;
-  height: 105px;
-  width: 300px;
-  overflow: hidden;
 `;
