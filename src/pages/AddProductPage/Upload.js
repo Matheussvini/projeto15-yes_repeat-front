@@ -1,35 +1,63 @@
 import styled, { css } from "styled-components";
-import React from "react";
+import React, { useCallback, useState } from "react";
 
-import Dropzone from "react-dropzone";
+import { useDropzone } from "react-dropzone";
 
-export default function Upload({ onUpload }) {
-  function renderDragMessage(isDragActive, isDragReject) {
-    if (!isDragActive) {
-      return <UploadMessege>Arraste arquivos aqui...</UploadMessege>;
-    }
-    console.log("drags", isDragActive, isDragReject);
+export default function Upload({ handleUpload }) {
+  const newArrFiles = [];
+  const [files, setFiles] = useState([]);
+  const onDrop = useCallback(
+    (f) => {
+      // console.log("recebi alguma coisa", f);
+      // files.forEach((e) => newArrFiles.push(e));
+      f.forEach((e) => newArrFiles.push(e));
+      // f.forEach((e) => handleUpload(e));
+      console.log("New ArrFiles", newArrFiles);
+      console.log("f", f);
+      console.log("files", files.concat(newArrFiles));
 
-    if (isDragReject) {
-      return <UploadMessege type="error">Arquivo não suportado</UploadMessege>;
-    }
-    console.log("success");
-    return <UploadMessege type="success">Solte os arquivos aqui</UploadMessege>;
-  }
+      // console.log("new arr", newArrFiles);
+
+      setFiles(files.concat(newArrFiles));
+      handleUpload(newArrFiles);
+    },
+    [files, setFiles, handleUpload]
+  );
+
+  const { isDragAccept, isDragReject, getRootProps, getInputProps } =
+    useDropzone({
+      accept: {
+        "image/jpeg": [],
+        "image/png": [],
+        "image/jpg": [],
+        "image/svg": [],
+        "image/pjpeg": [],
+        "image/gif": [],
+      },
+      onDrop,
+    });
+
+  // console.log("arrfiles", files);
 
   return (
-    <Dropzone accept="image/*" onDropAccepted={onUpload}>
-      {({ getRootProps, getInputProps, isDragActive, isDragReject }) => (
-        <DropContainer
-          {...getRootProps()}
-          isDragActive={isDragActive}
-          isDragReject={isDragReject}
-        >
-          <input {...getInputProps()} />
-          {renderDragMessage(isDragActive, isDragReject)}
-        </DropContainer>
-      )}
-    </Dropzone>
+    <div>
+      <DropContainer
+        {...getRootProps()}
+        isDragAccept={isDragAccept}
+        isDragReject={isDragReject}
+      >
+        {isDragAccept ? (
+          <UploadMessege type="success">Solte as imagens aqui</UploadMessege>
+        ) : isDragReject ? (
+          <UploadMessege type="error">Arquivo não suportado</UploadMessege>
+        ) : (
+          <UploadMessege>
+            Arraste ou clique aqui para enviar as imagens
+          </UploadMessege>
+        )}
+        <input {...getInputProps()} />
+      </DropContainer>
+    </div>
   );
 }
 
@@ -47,19 +75,15 @@ const DropContainer = styled.div.attrs({
   border: 1px dashed #ddd;
   border-radius: 4px;
   cursor: pointer;
-
   transition: height 0.2s ease;
-
-  ${(props) => props.isDragActive && dragActive};
+  ${(props) => props.isDragAccept && dragActive};
   ${(props) => props.isDragReject && dragReject};
 `;
-
 const messageColors = {
   default: "#999",
   error: "#e57878",
   success: "#78e5d5",
 };
-
 const UploadMessege = styled.p`
   display: flex;
   color: ${(props) => messageColors[props.type || "default"]};
